@@ -1,44 +1,68 @@
 -- Tabela 1: Pessoa
 -- Armazena dados pessoais genéricos, servindo como base para Paciente e Médico.
-CREATE TABLE Pessoa (
-    IdPseudo NUMBER(10) NOT NULL,
-    CPF CHAR(14) NOT NULL,
-    nome_civil VARCHAR2(60) NOT NULL,
+CREATE TABLE pessoa(
+    id_pseudo BIGINT GENERATED ALWAYS AS IDENTITY,
+    cpf CHAR(14) NOT NULL,
+    nome_civil VARCHAR(60) NOT NULL,
     data_nascimento DATE NOT NULL,
-    telefone_contato VARCHAR2(20) NOT NULL,
-    genero VARCHAR2(30),
-    CONSTRAINT PK_PESSOA PRIMARY KEY(IdPseudo),
-    CONSTRAINT SK_PESSOA_CPF UNIQUE(CPF),
-    CONSTRAINT CK_CPF CHECK(REGEXP_LIKE(CPF, '[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}'))
+    telefone_contato VARCHAR(20),
+    genero VARCHAR(30),
+
+    CONSTRAINT pk_pessoa PRIMARY KEY (id_pseudo),
+    CONSTRAINT uk_pessoa UNIQUE (cpf),
+    CONSTRAINT ck_pessoa_formato_cpf 
+        CHECK (cpf ~ '^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$')
 );
 
 
--- Tabela 2: Doenca
--- Tabela de domínio para armazenar as doenças (CID e nome).
-CREATE TABLE Doenca (
-    CID VARCHAR2(8) NOT NULL,
-    nome VARCHAR2(50),
-    CONSTRAINT PK_DOENCA PRIMARY KEY(CID)
+-- Tabela 2: Conta
+-- Tabela para armazenar os dados da conta do paciente ou tutor.
+CREATE TABLE conta(
+email VARCHAR(100),
+senha VARCHAR(50) NOT NULL,
+id_pessoa BIGINT NOT NULL,
+
+CONSTRAINT pk_conta PRIMARY KEY (email),
+CONSTRAINT uk_conta UNIQUE (pessoa),
+CONSTRAINT fk_pessoa FOREIGN KEY (id_pessoa)
+    REFERENCES pessoa(id_pseudo) 
 );
 
 
--- Tabela 3: Sintoma
--- Tabela de domínio para armazenar os sintomas (CID, nome, descrição).
-CREATE TABLE Sintoma (
-    CID VARCHAR2(8) NOT NULL,
-    nome VARCHAR2(50),
-    descricao VARCHAR2(500),
-    CONSTRAINT PK_SINTOMA PRIMARY KEY(CID)
+-- Tabela 3: Médico
+-- Especialização de Pessoa. Armazena dados específicos do médico.
+CREATE TABLE medico(
+    id_pseudo BIGINT,
+    crm VARCHAR(15) NOT NULL,
+    especializacao VARCHAR(50),
+    local_de_trabalho VARCHAR(150),
+
+    CONSTRAINT pk_medico PRIMARY KEY (id_pseudo),
+    CONSTRAINT uk_medico UNIQUE (crm),
+    CONSTRAINT fk_medico FOREIGN KEY (id_pseudo)
+        REFERENCES pessoa(id_pseudo)
 );
 
 
--- Tabela 4: Modelo
--- Tabela de domínio para armazenar os Modelos de IA (nome e URL).
-CREATE TABLE Modelo (
-    nome VARCHAR2(100) NOT NULL,
-    url VARCHAR2(255) NOT NULL,
-    CONSTRAINT PK_MODELO PRIMARY KEY(nome),
-    CONSTRAINT SQ_MODELO UNIQUE(url)
+-- Tabela 4: Paciente
+-- Especialização de Pessoa. Armazena dados específicos do paciente.
+CREATE TABLE paciente(
+    id_pseudo BIGINT,
+    status_paciente VARCHAR(8) NOT NULL -- pode ser apenas ativo ou inativo
+    responsavel BIGINT, -- variavel que é usada no caso do paciente ser menor de idade
+    historico_familiar TEXT, -- Considerando que o histórico familiar vai ser armazenado somente em forma de texto
+
+    CONSTRAINT pk_paciente PRIMARY KEY (id_pseudo),
+    CONSTRAINT fk_paciente_pessoa FOREIGN KEY (id_pseudo)
+        REFERENCES pessoa(id_pseudo),
+
+    -- Abaixo encontra-se o auto relacionamento. O responsável acaba por ter que cadastrar-se como um paciente também
+    CONSTRAINT fk_paciente_paciente FOREIGN KEY (responsavel)
+        REFERENCES paciente(id_pseudo),
+
+    -- Respeitando o Note 5: paciente não pode ser responsável de si mesmo
+    CONSTRAINT ck_paciente_autoresponsavel CHECK(responsavel IS NULL OR responsavel <> id_pseudo)
+        
 );
 
 
