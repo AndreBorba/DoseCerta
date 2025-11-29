@@ -16,34 +16,39 @@ async function apiGet(url) {
   return resp.json();
 }
 
-// Cadastro de Paciente
+// ------------- PACIENTE -------------
 async function cadastrarPaciente(e) {
   e.preventDefault();
   const f = new FormData(e.target);
   const body = Object.fromEntries(f.entries());
 
-  const result = await apiPost("/register", body);
+  // ROTA CORRETA
+  const result = await apiPost("/paciente/register", body);
+
   document.getElementById("resultado").innerText =
     JSON.stringify(result, null, 2);
 }
 
-// Cadastro de Médico
+// ------------- MÉDICO -------------
 async function cadastrarMedico(e) {
   e.preventDefault();
   const f = new FormData(e.target);
   const body = Object.fromEntries(f.entries());
 
-  const result = await apiPost("/register-medico", body);
+  // ROTA CORRETA
+  const result = await apiPost("/medico/register-medico", body);
+
   document.getElementById("resultado").innerText =
     JSON.stringify(result, null, 2);
 }
 
-// Buscar Paciente por nome ou CPF
+// ------------- BUSCAR PACIENTE -------------
 async function buscarPaciente(e) {
   e.preventDefault();
   const termo = document.getElementById("termo").value;
 
-  const data = await apiGet(`/buscar-paciente?termo=${termo}`);
+  // ROTA CORRETA
+  const data = await apiGet(`/buscar/buscar-paciente?termo=${termo}`);
 
   let html = "";
   for (const p of data.resultados) {
@@ -59,12 +64,13 @@ async function buscarPaciente(e) {
   document.getElementById("tabelaResultados").innerHTML = html;
 }
 
-// Buscar exames
+// ------------- BUSCAR EXAMES -------------
 async function buscarExames(e) {
   e.preventDefault();
   const cpf = document.getElementById("cpf-exame").value;
 
-  const data = await apiGet(`/exams?cpf=${cpf}`);
+  // ROTA CORRETA
+  const data = await apiGet(`/exames?cpf=${cpf}`);
 
   let html = "";
   for (const ex of data.exames) {
