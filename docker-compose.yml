@@ -11,10 +11,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      # - ./db/esquema.sql:/docker-entrypoint-initdb.d/01_schema.sql
-      # - ./db/insercoes.sql:/docker-entrypoint-initdb.d/02_insert.sql
-      - ./db/test_esquema.sql:/docker-entrypoint-initdb.d/01_schema.sql
-      - ./db/test_insercoes.sql:/docker-entrypoint-initdb.d/02_insert.sql
+      - ./db/esquema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./db/test-insercoes.sql:/docker-entrypoint-initdb.d/02_insert.sql
 
   backend:
     build: ./backend
@@ -29,8 +27,9 @@ services:
       DB_USER: postgres
       DB_PASS: postgres
       DB_NAME: dosecerta
-    volumes:
-      - ./backend:/app
+    # Removido o volume para não apagar node_modules
+    # volumes:
+    #   - ./backend:/app
 
   frontend:
     build: ./frontend

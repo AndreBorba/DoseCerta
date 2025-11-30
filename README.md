@@ -24,11 +24,11 @@ O foco do trabalho é mostrar como o banco de dados projetado pode ser integrado
 
 * **PostgreSQL** — SGBD utilizado para armazenar todas as entidades e consultas do projeto.
 * **Node.js + Express** — API REST responsável por conectar o frontend ao banco, executando transações e queries SQL.
-* **bcrypt** — Hashing de senhas para a entidade Conta.
 * **HTML, CSS, JavaScript** — Interface web simples para interação com o sistema.
-* **Bootstrap 5** — Estilização do frontend com layout responsivo.
 * **Fetch API** — Comunicação entre interface e backend.
 * **Docker** — Contêinerização do ambiente, permitindo subir banco e backend de forma padronizada e reproduzível.
+<!-- * **bcrypt** — Hashing de senhas para a entidade Conta. -->
+<!-- * **Bootstrap 5** — Estilização do frontend com layout responsivo. -->
 
 ---
 
@@ -43,11 +43,12 @@ git clone https://github.com/AndreBorba/DoseCerta.git
 # Entre no diretório do backend
 cd DoseCerta
 
-# Caso esteja rebuildando a imagem, é necessário apagar o volume anterior
-docker compose down -v
-
 # Build imagens docker
 docker compose up -d --build
+
+# Caso esteja rebuildando a imagem, 
+# é necessário apagar o volume anterior
+docker compose down -v
 
 # Caso já tenha a imagem buildada, basta subir ela
 docker compose up -d
@@ -78,34 +79,32 @@ DoseCerta/
 │   ├── package.json             # Dependências do backend
 │   ├── Dockerfile               # Instruções Docker do backend
 │   │
-│   ├── routes/                  # Rotas da API
-│   │   ├── paciente.js
-│   │   ├── medico.js
-│   │   ├── exames.js
-│   │   └── buscar.js
-│   │
-│   ├── controllers/             # Lógica das rotas (camada de controle)
-│       ├── pacienteController.js
-│       ├── medicoController.js
-│       ├── examesController.js
-│       └── buscarController.js
+│   └── routes/                  # Rotas da API
+│       ├── paciente.js
+│       ├── medico.js
+│       ├── exames.js
+│       └── buscar.js
 │
 ├── db/                          # SQL de DDL e DML
 │   ├── esquema.sql
-│   ├── insercao.sql
-│   ├── consultas.sql
+│   ├── insercoes.sql
+│   └── consultas.sql
 │
 ├── frontend/
 │   ├── index.html               # Página inicial
-│   ├── cadastro-paciente.html   # Tela de cadastro de paciente
 │   ├── cadastro-medico.html     # Tela de cadastro de médico
-│   ├── buscar-paciente.html     # Tela de busca de paciente
 │   ├── buscar-exames.html       # Tela de busca de exames
 │   ├── Dockerfile               # Instruções Docker do frontend
 │   │
-│   ├── assets/                  # Arquivos estáticos
-│       ├── styles.css           # Estilização da interface
-│       └── script.js            # Funções de comunicação com a API
+│   ├── pages/                   # Arquivos HTML
+│   │   ├── cadastropaciente.html # Página de cadastro de pacientes
+│   │   └── buscapaciente.html   # Página de busca de pacientes
+│   │
+│   ├── scripts/                 # Arquivos JavaScript
+│   ├   └── cadastropaciente.js  # Funções de comunicação com a API
+│   │
+│   └── style/                   # Arquivos CSS
+│       └── styles.css           # Estilização da interface
 │
 ├── docker-compose.yml           # Compose para execução do contêiner
 └── README.md                    # Documentação do projeto

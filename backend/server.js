@@ -1,11 +1,24 @@
-const { Pool } = require("pg");
+const express = require("express");
+const cors = require("cors");
+const pool = require("./db");
 
-const pool = new Pool({
-  user: "postgres",
-  host: "postgres", // <-- nome do serviço no compose
-  database: "dosecerta",
-  password: "postgres",
-  port: 5432,
+// IMPORTAR A ROTA DE CADASTRO DE PACIENTES
+const cadastroPacienteRoutes = require("./routes/cadastropaciente");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// ROTA DE TESTE
+app.get("/", (req, res) => {
+  res.send("Backend funcionando!");
 });
 
-module.exports = pool;
+// ROTA DE CADASTRO DE PACIENTES
+app.use("/cadastropaciente", cadastroPacienteRoutes);
+
+// INICIAR SERVIDOR
+app.listen(4000, () => {
+  console.log("Servidor rodando na porta 4000");
+});
