@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db");
-const fs = require("fs");
-const path = require("path");
 
 // Rota para listar CIDs disponíveis
 router.get("/cids", async (req, res) => {
@@ -15,14 +13,6 @@ router.get("/cids", async (req, res) => {
   }
 });
 
-// Função para ler arquivo SQL
-function carregarSQL(nomeArquivo) {
-  const caminho = path.join(__dirname, "../../db/consultas", nomeArquivo);
-  return fs.readFileSync(caminho, { encoding: "utf-8" });
-}
-
-const queryPacientes = carregarSQL("pacientes_sem_genetico.sql");
-
 // Rota para buscar pacientes com diagnóstico ativo e sem exame genético
 router.get("/pacientes", async (req, res) => {
   const { cid } = req.query;
@@ -32,7 +22,11 @@ router.get("/pacientes", async (req, res) => {
   }
 
   try {
-    const result = await pool.query(queryPacientes, [cid]);
+    // Consulta 1
+    const query = `
+      
+    `;
+    const result = await pool.query(query, [cid]);
     res.json(result.rows);
 
   } catch (err) {
