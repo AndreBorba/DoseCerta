@@ -6,15 +6,15 @@ async function cadastrarPaciente(event) {
   const form = event.target;
 
   const data = {
-    nome: form.nome.value,
+    nome: form.nome.value.toUpperCase(),
     cpf: form.cpf.value,
     data_nascimento: form.data_nascimento.value,
     genero: form.genero.value,
     telefone: form.telefone.value,
-    email: form.email.value,
+    email: form.email.value.toUpperCase(),
     senha: form.senha.value,
     responsavel: form.responsavel.value || null,
-    historico_familiar: form.historico_familiar.value
+    historico_familiar: form.historico_familiar.value.toUpperCase()
   };
 
   try {
@@ -28,6 +28,10 @@ async function cadastrarPaciente(event) {
 
     document.getElementById("resultado").textContent =
       JSON.stringify(json, null, 2);
+
+    if (json.success) {
+      form.reset();
+    }
 
   } catch (err) {
     console.error(err);

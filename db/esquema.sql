@@ -103,7 +103,7 @@ CREATE TABLE cuidado(
     id_paciente BIGINT NOT NULL,
     id_medico BIGINT NOT NULL,
     data_inicio DATE NOT NULL,
-    data_termino DATE,
+    data_termino DATE DEFAULT NULL,
 
     CONSTRAINT pk_cuidado PRIMARY KEY (id_paciente, id_medico, data_inicio),
     CONSTRAINT fk_cuidado_paciente FOREIGN KEY (id_paciente)
@@ -271,7 +271,7 @@ CREATE TABLE exame(
     id_paciente BIGINT NOT NULL,
     cnpj_laboratorio CHAR(18) NOT NULL,
     data_hora TIMESTAMP,
-    tipo VARCHAR(10) NOT NULL,  -- 'CLINICO' ou 'GENETICO'
+    tipo VARCHAR(8) NOT NULL,  -- 'CLINICO' ou 'GENETICO'
 
     CONSTRAINT pk_exame PRIMARY KEY (nro_protocolo),
     CONSTRAINT fk_exame_paciente FOREIGN KEY (id_paciente)
@@ -299,7 +299,7 @@ CREATE TABLE exame_clinico(
 CREATE TABLE exame_genetico(
     nro_protocolo BIGINT NOT NULL,
     tipo_amostra VARCHAR(100),
-    origem_genetica VARCHAR(15) NOT NULL,
+    origem_genetica VARCHAR(11) NOT NULL,
 
     CONSTRAINT pk_exame_genetico PRIMARY KEY (nro_protocolo),
     CONSTRAINT fk_exame_genetico_exame FOREIGN KEY (nro_protocolo)

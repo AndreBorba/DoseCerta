@@ -37,16 +37,16 @@ async function cadastrarMedico(event) {
 
   const data = {
     jaPaciente: document.getElementById("jaPaciente").checked,
-    nome: form.nome?.value,
+    nome: form.nome?.value.toUpperCase(),
     cpf: form.cpf?.value,
     data_nascimento: form.data_nascimento?.value,
     genero: form.genero?.value,
     telefone: form.telefone?.value,
-    email: form.email?.value,
+    email: form.email?.value.toUpperCase(),
     senha: form.senha?.value,
     crm: form.crm.value,
-    especializacao: form.especializacao.value,
-    local: form.local.value
+    especializacao: form.especializacao.value.toUpperCase(),
+    local: form.local.value.toUpperCase()
   };
 
   try {
@@ -60,7 +60,6 @@ async function cadastrarMedico(event) {
     document.getElementById("resultado").textContent = JSON.stringify(json, null, 2);
 
     if (json.success) {
-      // Limpar o formulário
       form.reset();
     }
 
