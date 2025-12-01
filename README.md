@@ -57,7 +57,11 @@ docker compose up -d
 ### 2) Acessando o banco PostgreSQL no contêiner
 
 ```bash
+# Opt1: Acesso ao terminal
 docker exec -it postgres_container psql -U postgres -d dosecerta
+
+# Opt2: Executar SQL de consultas
+docker exec -it postgres_container psql -U postgres -d dosecerta < db/consultas.sql
 ```
 
 ### 3) Acessando interface Web
@@ -74,40 +78,46 @@ O projeto é dividido em duas partes principais — **backend** (API em Node.js)
 ```
 DoseCerta/
 ├── backend/
-│   ├── server.js                # Inicialização do servidor Express
-│   ├── db.js                    # Conexão PostgreSQL
-│   ├── package.json             # Dependências do backend
-│   ├── Dockerfile               # Instruções Docker do backend
+│   ├── server.js                 # Inicialização do servidor Express
+│   ├── db.js                     # Conexão PostgreSQL
+│   ├── package.json              # Dependências do backend
+│   ├── Dockerfile                # Instruções Docker do backend
 │   │
-│   └── routes/                  # Rotas da API
-│       ├── paciente.js
-│       ├── medico.js
-│       ├── exames.js
-│       └── buscar.js
+│   └── routes/                   # Rotas da API
+│       ├── buscapaciente.js
+│       ├── buscapessoa.js
+│       ├── cadastromedico.js
+│       ├── cadastropaciente.js
+│       └── diagnosticosemgenetico.js
 │
-├── db/                          # SQL de DDL e DML
+├── db/                           # SQL de DDL e DML
 │   ├── esquema.sql
 │   ├── insercoes.sql
 │   └── consultas.sql
 │
 ├── frontend/
-│   ├── index.html               # Página inicial
-│   ├── cadastro-medico.html     # Tela de cadastro de médico
-│   ├── buscar-exames.html       # Tela de busca de exames
-│   ├── Dockerfile               # Instruções Docker do frontend
+│   ├── index.html                # Página inicial
+│   ├── Dockerfile                # Instruções Docker do frontend
 │   │
-│   ├── pages/                   # Arquivos HTML
-│   │   ├── cadastropaciente.html # Página de cadastro de pacientes
-│   │   └── buscapaciente.html   # Página de busca de pacientes
+│   ├── pages/                    # Arquivos HTML (páginas)
+│   │   ├── buscapaciente.html    # Busca de pacientes em cuidado por um médico
+│   │   ├── buscapessoa.html      # Busca de pessoas
+│   │   ├── cadastromedico.html   # Cadastro de médicos
+│   │   ├── cadastropaciente.html # Cadastro de pacientes
+│   │   └── diagnosticosemgenetico.html # Busca de pacientes com diagnóstico e sem exame genético
 │   │
-│   ├── scripts/                 # Arquivos JavaScript
-│   ├   └── cadastropaciente.js  # Funções de comunicação com a API
+│   ├── scripts/                  # Arquivos JavaScript (comunicação com API)
+│   │   ├── buscapaciente.js
+│   │   ├── buscapessoa.js
+│   │   ├── cadastromedico.js
+│   │   ├── cadastropaciente.js
+│   │   └── diagnosticosemgenetico.js
 │   │
-│   └── style/                   # Arquivos CSS
-│       └── styles.css           # Estilização da interface
+│   └── style/                    # Arquivos CSS (estilização)
+│       └── styles.css
 │
-├── docker-compose.yml           # Compose para execução do contêiner
-└── README.md                    # Documentação do projeto
+├── docker-compose.yml            # Compose para execução do contêiner
+└── README.md                     # Documentação do projeto
 ```
 
 ## 👥 Project Owners

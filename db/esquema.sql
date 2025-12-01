@@ -38,14 +38,13 @@ CREATE TABLE pessoa(
     nome_civil VARCHAR(60) NOT NULL,
     data_nascimento DATE NOT NULL,
     telefone_contato VARCHAR(20),
-    -- genero VARCHAR(30),
     genero CHAR(1),
 
     CONSTRAINT pk_pessoa PRIMARY KEY (id_pseudo),
     CONSTRAINT uk_pessoa UNIQUE (cpf),
     CONSTRAINT ck_pessoa_formato_cpf 
         CHECK (cpf ~ '^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$'),
-    CONSTRAINT ck_pessoa_genero CHECK(genero in ('F', 'M'))
+    CONSTRAINT ck_pessoa_genero CHECK(genero in ('F', 'M', NULL))
 );
 
 
