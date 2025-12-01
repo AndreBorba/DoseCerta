@@ -30,8 +30,6 @@ DROP TABLE IF EXISTS conta CASCADE;
 DROP TABLE IF EXISTS pessoa CASCADE;
 
 
-
-
 -- Tabela 1: Pessoa
 -- Armazena dados pessoais genéricos, servindo como base para Paciente e Médico.
 CREATE TABLE pessoa(
@@ -245,6 +243,7 @@ CREATE TABLE recomendacao_tratamento(
     id_diagnostico BIGINT NOT NULL,
     nome_modelo VARCHAR(100) NOT NULL,
     data_hora TIMESTAMP NOT NULL,
+    texto_recomendacao TEXT NOT NULL,
 
     CONSTRAINT pk_recomendacao_tratamento PRIMARY KEY (id_diagnostico, nome_modelo, data_hora),
     CONSTRAINT fk_reco_diag FOREIGN KEY (id_diagnostico)
@@ -256,13 +255,13 @@ CREATE TABLE recomendacao_tratamento(
 -- Tabela 16: Laboratório
 -- Armazena dados cadastrais dos laboratórios.
 CREATE TABLE laboratorio(
-    cnpj         CHAR(18) NOT NULL,
+    cnpj CHAR(18) NOT NULL,
     razao_social VARCHAR(100),
-    endereco     VARCHAR(200),
-    cnes         VARCHAR(20),
-    email        VARCHAR(100),
-    telefone1    VARCHAR(20),
-    telefone2    VARCHAR(20),
+    endereco VARCHAR(200),
+    cnes VARCHAR(20),
+    email VARCHAR(100),
+    telefone1 VARCHAR(20),
+    telefone2 VARCHAR(20),
 
     CONSTRAINT pk_laboratorio PRIMARY KEY (cnpj),
     CONSTRAINT uk_laboratorio_cnes UNIQUE (cnes)
@@ -303,11 +302,12 @@ CREATE TABLE exame_clinico(
 CREATE TABLE exame_genetico(
     nro_protocolo BIGINT NOT NULL,
     tipo_amostra VARCHAR(100),
-    origem_genetica VARCHAR(100) NOT NULL,
+    origem_genetica VARCHAR(15) NOT NULL,
 
     CONSTRAINT pk_exame_genetico PRIMARY KEY (nro_protocolo),
     CONSTRAINT fk_exame_genetico_exame FOREIGN KEY (nro_protocolo)
-        REFERENCES exame(nro_protocolo)
+        REFERENCES exame(nro_protocolo),
+	CONSTRAINT ck_origem_genetica CHECK (UPPER(origem_genetica) IN ('SOMATICO', 'GERMINATIVO'))
 );
 
 -- Tabela 20: Features
