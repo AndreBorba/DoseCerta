@@ -2,23 +2,35 @@ const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
 
-// IMPORTAR A ROTA DE CADASTRO DE PACIENTES
+// Rotas
 const cadastroPacienteRoutes = require("./routes/cadastropaciente");
+const buscaPacienteRoutes = require("./routes/buscapaciente");
+const buscaPessoaRoutes = require("./routes/buscapessoa");
+const buscaDiagnosticoSemGeneticoRoutes = require("./routes/diagnosticosemgenetico");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// ROTA DE TESTE
+// ROTA TESTE
 app.get("/", (req, res) => {
   res.send("Backend funcionando!");
 });
 
-// ROTA DE CADASTRO DE PACIENTES
+// Cadastro Paciente
 app.use("/cadastropaciente", cadastroPacienteRoutes);
 
-// INICIAR SERVIDOR
+// Busca Paciente
+app.use("/buscapaciente", buscaPacienteRoutes);
+
+// Busca Pessoa
+app.use("/buscapessoa", buscaPessoaRoutes);
+
+// Busca Diagnostico sem Genetico
+app.use("/diagnosticosemgenetico", buscaDiagnosticoSemGeneticoRoutes);
+
+// Iniciar servidor
 app.listen(4000, () => {
   console.log("Servidor rodando na porta 4000");
 });

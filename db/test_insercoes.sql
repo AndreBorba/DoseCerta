@@ -7,8 +7,8 @@
 -- ===============================================
 INSERT INTO pessoa (cpf, nome_civil, data_nascimento, telefone_contato, genero)
 VALUES 
-('123.456.789-10', 'João Silva', '1980-05-10', '(11) 9999-0000', 'Masculino'),
-('987.654.321-00', 'Maria Oliveira', '1995-08-20', '(21) 98888-7777', 'Feminino')
+('123.456.789-10', 'João Silva', '1980-05-10', '(11) 9999-0000', 'M'),
+('987.654.321-00', 'Maria Oliveira', '1995-08-20', '(21) 98888-7777', 'F')
 ON CONFLICT DO NOTHING;
 
 -- Recupera IDs
