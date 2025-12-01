@@ -3,10 +3,10 @@ const cors = require("cors");
 const pool = require("./db");
 
 // Rotas
-const cadastroPacienteRoutes = require("./routes/cadastropaciente");
-const cadastroMedicoRoutes = require("./routes/cadastromedico");
 const buscaPacienteRoutes = require("./routes/buscapaciente");
 const buscaPessoaRoutes = require("./routes/buscapessoa");
+const cadastroMedicoRoutes = require("./routes/cadastromedico");
+const cadastroPacienteRoutes = require("./routes/cadastropaciente");
 const buscaDiagnosticoSemGeneticoRoutes = require("./routes/diagnosticosemgenetico");
 
 const app = express();
@@ -19,17 +19,17 @@ app.get("/", (req, res) => {
   res.send("Backend funcionando!");
 });
 
-// Cadastro Paciente
-app.use("/cadastropaciente", cadastroPacienteRoutes);
-
-// Cadastro Médico
-app.use("/cadastromedico", cadastroMedicoRoutes);
-
 // Busca Paciente
 app.use("/buscapaciente", buscaPacienteRoutes);
 
 // Busca Pessoa
 app.use("/buscapessoa", buscaPessoaRoutes);
+
+// Cadastro Médico
+app.use("/cadastromedico", cadastroMedicoRoutes);
+
+// Cadastro Paciente
+app.use("/cadastropaciente", cadastroPacienteRoutes);
 
 // Busca Diagnostico sem Genetico
 app.use("/diagnosticosemgenetico", buscaDiagnosticoSemGeneticoRoutes);
