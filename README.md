@@ -66,9 +66,8 @@ docker exec -it postgres_container psql -U postgres -d dosecerta < db/consultas.
 
 ### 3) Acessando interface Web
 
-```
-http://localhost:8080/
-```
+[http://localhost:8080/](http://localhost:8080/)
+
 ---
 
 ## 📄 Work Organization

@@ -4,6 +4,7 @@ const pool = require("./db");
 
 // Rotas
 const cadastroPacienteRoutes = require("./routes/cadastropaciente");
+const cadastroMedicoRoutes = require("./routes/cadastromedico");
 const buscaPacienteRoutes = require("./routes/buscapaciente");
 const buscaPessoaRoutes = require("./routes/buscapessoa");
 const buscaDiagnosticoSemGeneticoRoutes = require("./routes/diagnosticosemgenetico");
@@ -20,6 +21,9 @@ app.get("/", (req, res) => {
 
 // Cadastro Paciente
 app.use("/cadastropaciente", cadastroPacienteRoutes);
+
+// Cadastro Médico
+app.use("/cadastromedico", cadastroMedicoRoutes);
 
 // Busca Paciente
 app.use("/buscapaciente", buscaPacienteRoutes);
