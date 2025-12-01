@@ -81,8 +81,8 @@ CREATE TABLE medico(
 -- Especialização de Pessoa. Armazena dados específicos do paciente.
 CREATE TABLE paciente(
     id_pseudo BIGINT,
-    status_paciente VARCHAR(8) NOT NULL, -- pode ser apenas "ativo" ou "inativo"
-    responsavel BIGINT, -- variavel que é usada no caso do paciente ser menor de idade
+    status_paciente BOOLEAN NOT NULL DEFAULT TRUE, -- 1 = ativo; 0 = inativo
+    responsavel BIGINT DEFAULT NULL, -- variavel que é usada no caso do paciente ser menor de idade
     historico_familiar TEXT, -- Considerando que o histórico familiar vai ser armazenado somente em forma de texto
 
     CONSTRAINT pk_paciente PRIMARY KEY (id_pseudo),
@@ -94,9 +94,7 @@ CREATE TABLE paciente(
         REFERENCES paciente(id_pseudo),
 
     -- Respeitando o Note 5: paciente não pode ser responsável de si mesmo
-    CONSTRAINT ck_paciente_autoresponsavel CHECK(responsavel IS NULL OR responsavel <> id_pseudo),
-
-    CONSTRAINT ck_tipo_status CHECK(UPPER(status_paciente) IN ('ATIVO', 'INATIVO'))   
+    CONSTRAINT ck_paciente_autoresponsavel CHECK(responsavel IS NULL OR responsavel <> id_pseudo)
 );
 
 -- Tabela 5: Cuidado

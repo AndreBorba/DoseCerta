@@ -78,20 +78,23 @@ INSERT INTO medico (id_pseudo, crm, especializacao, local_de_trabalho) VALUES
 
 -- Pacientes
 INSERT INTO paciente (id_pseudo, status_paciente, responsavel, historico_familiar) VALUES
-(3, 'ATIVO', NULL, 'Mãe com câncer de mama aos 50 anos.'),
-(4, 'ATIVO', NULL, 'Pai fumante e com enfisema.'),
-(5, 'ATIVO', NULL, 'Histórico de diabetes e hipertensão na família.'),
-(6, 'ATIVO', NULL, NULL), -- Responsável legal cadastrado como paciente
-(7, 'ATIVO', 6, 'Avó materna com Alzheimer.'),
-(8, 'ATIVO', NULL, 'Irmã com câncer de mama.'),
-(9, 'ATIVO', NULL, 'Sem histórico familiar conhecido.'),
-(10, 'ATIVO', NULL, 'Mãe com diabetes tipo II.'),
-(11, 'ATIVO', NULL, 'Sem histórico familiar conhecido.'),
-(12, 'ATIVO', NULL, 'Pai com hipertensão.'),
-(13, 'ATIVO', NULL, 'Mãe com diabetes.'),
-(14, 'ATIVO', NULL, 'Sem histórico familiar conhecido.'),
-(15, 'ATIVO', NULL, 'Pai com hipertensão.'),
-(16, 'ATIVO', NULL, 'Mãe com câncer.');
+(3, TRUE, NULL, 'Mãe com câncer de mama aos 50 anos.'),
+(4, TRUE, NULL, 'Pai fumante e com enfisema.'),
+(5, TRUE, NULL, 'Histórico de diabetes e hipertensão na família.'),
+(6, TRUE, NULL, NULL), -- Responsável legal cadastrado como paciente
+(7, TRUE, 6, 'Avó materna com Alzheimer.'),
+(8, TRUE, NULL, 'Irmã com câncer de mama.'),
+(9, TRUE, NULL, 'Sem histórico familiar conhecido.');
+
+-- Pacientes com atributos default
+INSERT INTO paciente (id_pseudo, historico_familiar) VALUES
+(10, 'Mãe com diabetes tipo II.'),
+(11, 'Sem histórico familiar conhecido.'),
+(12, 'Pai com hipertensão.'),
+(13, 'Mãe com diabetes.'),
+(14, 'Sem histórico familiar conhecido.'),
+(15, 'Pai com hipertensão.'),
+(16, 'Mãe com câncer.');
 
 -- Contas de Acesso
 INSERT INTO conta (email, senha, id_pessoa) VALUES
