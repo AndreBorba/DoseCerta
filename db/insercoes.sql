@@ -33,24 +33,24 @@ TRUNCATE TABLE pessoa RESTART IDENTITY CASCADE;
 
 -- 1. Médicos (IDs 1 e 2)
 INSERT INTO pessoa (cpf, nome_civil, data_nascimento, genero, telefone_contato) VALUES
-('111.111.111-11', 'Ricardo Oliveira', '1970-11-20', 'MASCULINO', '551199991111'),
-('222.222.222-22', 'Camila Santos', '1985-05-15', 'FEMININO', '551199992222');
+('111.111.111-11', 'Ricardo Oliveira', '1970-11-20', 'M', '551199991111'),
+('222.222.222-22', 'Camila Santos', '1985-05-15', 'F', '551199992222');
 
 -- 2. Pacientes - Grupo 1 (IDs 3, 4, 5)
 INSERT INTO pessoa (cpf, nome_civil, data_nascimento, genero, telefone_contato) VALUES
-('333.333.333-33', 'Ana Pereira', '1960-03-01', 'FEMININO', '551199993333'),
-('444.444.444-44', 'Beatriz Costa', '1975-06-15', 'FEMININO', '551199994444'),
-('555.555.555-55', 'Carlos Menezes', '1980-09-20', 'MASCULINO', '551199995555');
+('333.333.333-33', 'Ana Pereira', '1960-03-01', 'F', '551199993333'),
+('444.444.444-44', 'Beatriz Costa', '1975-06-15', 'F', '551199994444'),
+('555.555.555-55', 'Carlos Menezes', '1980-09-20', 'M', '551199995555');
 
 -- 3. Responsável Legal e Menor de Idade (IDs 6 e 7)
 INSERT INTO pessoa (cpf, nome_civil, data_nascimento, genero, telefone_contato) VALUES
-('666.666.666-66', 'Mário Souza', '1990-01-01', 'MASCULINO', '551199996666'),
-('777.777.777-77', 'Laura Souza', '2010-12-05', 'FEMININO', '551199997777');
+('666.666.666-66', 'Mário Souza', '1990-01-01', 'M', '551199996666'),
+('777.777.777-77', 'Laura Souza', '2010-12-05', 'F', '551199997777');
 
 -- 4. Pacientes - Grupo 2 (IDs 8 e 9)
 INSERT INTO pessoa (cpf, nome_civil, data_nascimento, genero, telefone_contato) VALUES
-('888.888.888-88', 'Diana Lima', '1985-06-15', 'FEMININO', '551199998888'),
-('999.999.999-99', 'Érica Rocha', '2000-01-01', 'FEMININO', '551199999999');
+('888.888.888-88', 'Diana Lima', '1985-06-15', 'F', '551199998888'),
+('999.999.999-99', 'Érica Rocha', '2000-01-01', 'F', '551199999999');
 
 
 -- =========================================================

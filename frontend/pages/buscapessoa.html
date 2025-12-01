@@ -17,9 +17,9 @@
 
 <div class="container">
   <div class="card p-4">
-    <h2>Consultar Pacientes em Tratamento por um Medico</h2>
+    <h2>Consultar Pessoa</h2>
 
-    <form onsubmit="buscarPaciente(event)">
+    <form onsubmit="buscarPessoa(event)">
       <label>Buscar por Nome ou CPF</label>
       <input id="termo" class="form-control" required>
       <button class="btn btn-primary mt-3">Buscar</button>
@@ -28,12 +28,12 @@
     <table class="table mt-4">
       <thead>
         <tr>
-          <th>Nome Medico</th>
-          <th>Nome Paciente</th>
-          <th>ID Paciente</th>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CPF</th>
           <th>Telefone</th>
-          <th>Data Inicio</th>
-          <th>Data Fim</th>
+          <th>Paciente</th>
+          <th>Médico</th>
         </tr>
       </thead>
       <tbody id="tabelaResultados"></tbody>
@@ -41,6 +41,6 @@
   </div>
 </div>
 
-<script src="../scripts/buscapaciente.js"></script>
+<script src="../scripts/buscapessoa.js"></script>
 </body>
 </html>
