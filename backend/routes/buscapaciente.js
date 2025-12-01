@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
       FROM pessoa pp
       JOIN (SELECT * FROM cuidado 
             WHERE (data_termino is NULL) or 
-                  (data_termino < NOW())) c
+                  (data_termino > NOW())) c
           ON pp.id_pseudo = c.id_paciente
       JOIN pessoa pm ON pm.id_pseudo = c.id_medico
       WHERE pm.nome_civil ILIKE $1

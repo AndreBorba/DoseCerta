@@ -59,7 +59,7 @@ docker compose up -d
 docker exec -it postgres_container psql -U postgres -d dosecerta
 
 # Opt2: Executar SQL de consultas
-docker exec -it postgres_container psql -U postgres -d dosecerta < db/consultas.sql
+docker exec -i postgres_container psql -U postgres -d dosecerta < db/consultas.sql
 ```
 
 ### 3) Acessando interface Web

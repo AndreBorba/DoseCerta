@@ -15,7 +15,7 @@
 
 <div class="container mt-4">
   <div class="card p-4">
-    <h2>Buscar Pacientes que possuem Diagnóstico de uma Doença, mas que não possuem Exame Genético desse Diagnóstico</h2>
+    <h2>Buscar Pacientes que possuem Diagnóstico Ativo de uma Doença, mas que não possuem Exame Genético desse Diagnóstico</h2>
 
     <form onsubmit="buscarDiagnosticoSemGenetico(event)">
       <label for="cid">Selecione a Doença (CID):</label>
@@ -29,6 +29,7 @@
           <th>Nome</th>
           <th>Telefone</th>
           <th>Diagnóstico</th>
+          <th>ID</th>
         </tr>
       </thead>
       <tbody id="tabelaResultados"></tbody>

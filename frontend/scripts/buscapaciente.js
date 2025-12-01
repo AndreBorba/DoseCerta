@@ -33,7 +33,7 @@ async function buscarPaciente(e) {
     });
 
   } catch (error) {
-    console.error("Erro ao buscar paciente:", error);
+    console.error("Erro ao buscar pacientes:", error);
     tabela.innerHTML = "<tr><td colspan='5'>Erro ao buscar</td></tr>";
   }
 }

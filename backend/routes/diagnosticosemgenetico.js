@@ -22,10 +22,28 @@ router.get("/pacientes", async (req, res) => {
   }
 
   try {
-    // TODO: Consulta 1
     const query = `
-      
+      SELECT
+          p.nome_civil AS nome,
+          p.telefone_contato AS telefone,
+          d.nome AS diagnostico,
+          diag.id_diagnostico AS id
+      FROM pessoa p
+      JOIN paciente pac ON p.id_pseudo = pac.id_pseudo
+      JOIN diagnostico diag ON pac.id_pseudo = diag.id_paciente
+      JOIN doenca d ON diag.cid_doenca = d.cid
+      WHERE diag.status = TRUE
+        AND d.cid = $1
+        AND NOT EXISTS (
+            SELECT 1
+            FROM atrela_se ats
+            JOIN exame ex ON ats.nro_protocolo = ex.nro_protocolo
+            WHERE ats.id_diagnostico = diag.id_diagnostico
+              AND UPPER(ex.tipo) = 'GENETICO'
+        )
+      ORDER BY p.nome_civil;
     `;
+
     const result = await pool.query(query, [cid]);
     res.json(result.rows);
 
@@ -34,5 +52,6 @@ router.get("/pacientes", async (req, res) => {
     res.status(500).json({ erro: "Erro ao buscar pacientes" });
   }
 });
+
 
 module.exports = router;

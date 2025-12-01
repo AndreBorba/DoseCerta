@@ -45,6 +45,7 @@ async function buscarDiagnosticoSemGenetico(e) {
           <td>${p.nome}</td>
           <td>${p.telefone || "-"}</td>
           <td>${p.diagnostico}</td>
+          <td>${p.id}</td>
         </tr>
       `;
     });

@@ -52,6 +52,18 @@ INSERT INTO pessoa (cpf, nome_civil, data_nascimento, genero, telefone_contato) 
 ('888.888.888-88', 'Diana Lima', '1985-06-15', 'F', '551199998888'),
 ('999.999.999-99', 'Érica Rocha', '2000-01-01', 'F', '551199999999');
 
+-- 5. Pacientes e Médicos (IDs 10 e 11)
+INSERT INTO pessoa (cpf, nome_civil, data_nascimento, genero, telefone_contato) VALUES
+('010.010.010-10', 'Laura Pereira', '1985-06-15', 'F', '551199991010'),
+('011.011.011-11', 'Érica Laura', '2000-01-01', 'F', '551199990011');
+
+-- 6. Pacientes para teste de Consulta 1 (IDS 12 a 16)
+INSERT INTO pessoa (cpf, nome_civil, data_nascimento, genero, telefone_contato) VALUES
+('121.121.121-21', 'Fernando Alves', '1988-07-22', 'M', '551198888121'),
+('131.131.131-31', 'Gabriela Martins', '1992-03-10', 'F', '551198888131'),
+('141.141.141-41', 'Lucas Ferreira', '1995-05-12', 'M', '551198888141'),
+('151.151.151-51', 'Mariana Costa', '1987-09-08', 'F', '551198888151'),
+('161.161.161-61', 'Paulo Oliveira', '1978-11-20', 'M', '551198888161');
 
 -- =========================================================
 -- CADASTROS ESPECÍFICOS (MÉDICO, PACIENTE, CONTA)
@@ -60,7 +72,9 @@ INSERT INTO pessoa (cpf, nome_civil, data_nascimento, genero, telefone_contato) 
 -- Médicos
 INSERT INTO medico (id_pseudo, crm, especializacao, local_de_trabalho) VALUES
 (1, 'CRM/SP 123456', 'Oncologia', 'Hospital Oncológico Central'),
-(2, 'CRM/SP 987654', 'Cardiologia', 'Clínica CardioGen');
+(2, 'CRM/SP 987654', 'Cardiologia', 'Clínica CardioGen'),
+(10, 'CRM/MG 121212', 'Dermatologista', NULL),
+(11, 'CRM/MG 554554', 'Ortopedista', 'Ortopedia BH');
 
 -- Pacientes
 INSERT INTO paciente (id_pseudo, status_paciente, responsavel, historico_familiar) VALUES
@@ -70,13 +84,21 @@ INSERT INTO paciente (id_pseudo, status_paciente, responsavel, historico_familia
 (6, 'ATIVO', NULL, NULL), -- Responsável legal cadastrado como paciente
 (7, 'ATIVO', 6, 'Avó materna com Alzheimer.'),
 (8, 'ATIVO', NULL, 'Irmã com câncer de mama.'),
-(9, 'ATIVO', NULL, 'Sem histórico familiar conhecido.');
+(9, 'ATIVO', NULL, 'Sem histórico familiar conhecido.'),
+(10, 'ATIVO', NULL, 'Mãe com diabetes tipo II.'),
+(11, 'ATIVO', NULL, 'Sem histórico familiar conhecido.'),
+(12, 'ATIVO', NULL, 'Pai com hipertensão.'),
+(13, 'ATIVO', NULL, 'Mãe com diabetes.'),
+(14, 'ATIVO', NULL, 'Sem histórico familiar conhecido.'),
+(15, 'ATIVO', NULL, 'Pai com hipertensão.'),
+(16, 'ATIVO', NULL, 'Mãe com câncer.');
 
 -- Contas de Acesso
 INSERT INTO conta (email, senha, id_pessoa) VALUES
 ('ricardo.med@hospital.com', 'hash_segura_1', 1),
 ('camila.med@cardiogen.com', 'hash_segura_2', 2),
-('mario.souza@email.com', 'hash_segura_3', 6);
+('mario.souza@email.com', 'hash_segura_3', 6),
+('erica.laura@ortobh.com', 'hash_segura_4', 11);
 
 
 -- =========================================================
@@ -87,7 +109,10 @@ INSERT INTO cuidado (id_paciente, id_medico, data_inicio, data_termino) VALUES
 (4, 1, '2025-01-15', NULL),
 (8, 1, '2025-02-01', NULL),
 (9, 1, '2025-02-05', NULL),
-(5, 2, '2025-02-10', NULL);
+(5, 2, '2025-02-10', NULL),
+(10, 11, '2023-02-10', '2025-02-10'),
+(9, 10, '2025-08-08', NULL),
+(9, 11, '2021-05-05', '2024-03-07');
 
 
 -- =========================================================
@@ -107,7 +132,7 @@ INSERT INTO sintoma (cid, nome, descricao) VALUES
 ('R20', 'Parestesia', 'Formigamento ou dormência.'),
 ('R00.0', 'Taquicardia', 'Aceleração anormal dos batimentos cardíacos.');
 
--- Diagnósticos (IDs gerados automaticamente: 1 a 7)
+-- Diagnósticos (IDs gerados automaticamente: 1 a 12)
 INSERT INTO diagnostico (id_paciente, cid_doenca, data_hora, status) VALUES 
 (3, 'C50', '2024-12-01 10:00:00', TRUE), -- ID 1 (Ana)
 (4, 'C34', '2025-01-15 12:00:00', TRUE), -- ID 2 (Bia)
@@ -115,7 +140,12 @@ INSERT INTO diagnostico (id_paciente, cid_doenca, data_hora, status) VALUES
 (5, 'E11', '2021-03-05 14:00:00', TRUE), -- ID 4 (Carlos)
 (8, 'C50', '2025-02-01 15:00:00', TRUE), -- ID 5 (Diana)
 (9, 'C50', '2025-02-05 16:00:00', TRUE), -- ID 6 (Érica)
-(7, 'J45', '2023-08-10 17:00:00', TRUE); -- ID 7 (Laura)
+(7, 'J45', '2023-08-10 17:00:00', TRUE), -- ID 7 (Laura)
+(12, 'C50', '2025-05-01 09:00:00', TRUE),  -- Fernando: Câncer de mama, sem exame genético
+(13, 'E11', '2025-05-03 10:00:00', TRUE),  -- Gabriela: Diabetes, sem exame genético
+(14, 'C50', '2025-05-10 10:00:00', FALSE),  -- Inativo → não aparece
+(15, 'E11', '2025-05-11 11:00:00', TRUE),   -- Ativo, mas com exame genético vinculado → não aparece
+(16, 'J45', '2025-05-12 12:00:00', FALSE);   -- Ativo, mas CID diferente da busca → não aparece
 
 -- Ocorrências de Sintomas
 INSERT INTO ocorrencia_sintoma (id_diagnostico, cid_sintoma, data_inicio, duracao, observacao) VALUES
@@ -228,13 +258,32 @@ INSERT INTO feature (nro_protocolo, nome, valor, unidade) VALUES
 (1008, 'EOSINOFILOS', '450', '/mm3'),
 (1008, 'IGE TOTAL', '120', 'UI/mL');
 
+-- Exame 9 e 10: Teste de Consulta 1 Positiva
+INSERT INTO exame (nro_protocolo, id_paciente, cnpj_laboratorio, data_hora, tipo) VALUES
+(1009, 12, '00.000.000/0002-02', '2025-05-02 08:00:00', 'CLINICO'),
+(1010, 13, '00.000.000/0002-02', '2025-05-04 11:00:00', 'CLINICO');
+INSERT INTO exame_clinico (nro_protocolo) VALUES (1009), (1010);
+INSERT INTO feature (nro_protocolo, nome, valor, unidade) VALUES
+(1009, 'GLICOSE', '120', 'mg/dL'),
+(1010, 'PRESSAO_SISTOLICA', '130', 'mmHg');
+
+-- Exame 11: Teste de Consulta 1 Negativa
+INSERT INTO exame (nro_protocolo, id_paciente, cnpj_laboratorio, data_hora, tipo) VALUES
+(1011, 15, '00.000.000/0001-01', '2025-05-11 10:00:00', 'GENETICO');
+INSERT INTO exame_genetico (nro_protocolo, tipo_amostra, origem_genetica) VALUES
+(1011, 'SANGUINEA', 'GERMINATIVO');
+INSERT INTO identifica (nro_protocolo, hgvs) VALUES
+(1011, 'BRCA1');
+
 
 -- =========================================================
 -- PARTE 6: ATRELA-SE (Vincula Exames a Diagnósticos)
 -- =========================================================
 INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (1, 1001); -- Ana C50 -> Exame BRCA
-INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (5, 1002); -- Diana C50 -> Exame BRCA
-INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (6, 1003); -- Erica C50 -> Exame BRCA
 INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (2, 1004); -- Bia C34 -> Exame EGFR
 INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (3, 1005); -- Carlos I10 -> Exame Clinico
+INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (5, 1002); -- Diana C50 -> Exame BRCA
+INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (6, 1003); -- Erica C50 -> Exame BRCA
 INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (7, 1008); -- Laura J45 -> Exame Clinico
+INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (11, 1011); -- Mariana E11 -> EXame BRCA1
+
