@@ -1,7 +1,8 @@
--- Listar os dados de contato (Nome, Telefone) e o diagnóstico de pacientes que possuem
--- uma determinada doença ativa (por exemplo, filtrando por um código CID específico
--- ou nome da doença), mas que ainda não realizaram nenhum exame genético vinculado
--- a esse diagnóstico.
+-- ========================================================================================
+-- CONSULTA 1 (COMPLEXIDADE MÉDIA): FILTRAGEM E ANTI-JUNÇÃO
+-- OBJETIVO: Listar dados de contato e diagnóstico de pacientes com doença ativa
+--           que não realizaram exame genético vinculado a esse diagnóstico.
+-- ========================================================================================
 
 SELECT
     p.nome_civil,
@@ -28,10 +29,11 @@ WHERE
             AND UPPER(ex.tipo) = 'GENETICO'
     );
 
--- Gerar um relatório estatístico que mostre, para cada Modelo de IA cadastrado
--- (agrupado por Nome do Modelo), a quantidade total de recomendações de tratamento
--- emitidas e quantos desses diagnósticos associados estão atualmente com status "inativo"
--- (o que pode sugerir cura ou fim do tratamento).
+-- ========================================================================================
+-- CONSULTA 2 (COMPLEXIDADE MÉDIA): AGRUPAMENTO E AGREGAÇÃO
+-- OBJETIVO: Gerar relatório estatístico de recomendações de tratamento por Modelo de IA,
+--           incluindo diagnósticos inativos.
+-- ========================================================================================
 
 SELECT
     m.nome AS nome_modelo,
@@ -48,11 +50,11 @@ GROUP BY
 ORDER BY
     m.nome;
 
--- Identificar pacientes que possuem um marcador genético específico de alto risco
--- (identificado pelo código HGVS, ex: uma variante no gene BRCA1) e que,
--- simultaneamente, possuem hábitos de risco registrados (ex: 'Tabagismo' ou 'Etilismo')
--- no seu histórico. O relatório deve retornar o ID do paciente, a descrição do
--- marcador e o peso mais recente registrado no perfil clínico.
+-- ========================================================================================
+-- CONSULTA 3 (COMPLEXIDADE ALTA): SUBQUERY CORRELACIONADA E MÚLTIPLOS JOINS
+-- OBJETIVO: Identificar pacientes com marcador genético de alto risco e hábitos de risco,
+--           retornando ID do paciente, descrição do marcador e peso mais recente.
+-- ========================================================================================
 
 SELECT DISTINCT
     p.id_pseudo,
