@@ -22,11 +22,12 @@ async function buscarPaciente(e) {
     dados.forEach(p => {
       tabela.innerHTML += `
         <tr>
-          <td>${p.id}</td>
-          <td>${p.nome}</td>
-          <td>${p.cpf}</td>
-          <td>${p.telefone || "-"}</td>
-          <td>${p.status}</td>
+          <td>${p.nomemedico}</td>
+          <td>${p.nomepaciente}</td>
+          <td>${p.idpaciente}</td>
+          <td>${p.telefonepaciente || "-"}</td>
+          <td>${p.dataini}</td>
+          <td>${p.datafim}</td>
         </tr>
       `;
     });

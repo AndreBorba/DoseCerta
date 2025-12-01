@@ -13,16 +13,21 @@ router.get("/", async (req, res) => {
   try {
     const query = `
       SELECT 
-        p.id_pseudo AS id,
-        p.nome_civil AS nome,
-        p.cpf,
-        p.telefone_contato AS telefone,
-        pa.status_paciente AS status
-      FROM pessoa p
-      JOIN paciente pa ON pa.id_pseudo = p.id_pseudo
-      WHERE p.nome_civil ILIKE $1
-         OR p.cpf = $2
-      ORDER BY p.nome_civil;
+        pm.nome_civil AS nomemedico,
+        pp.nome_civil AS nomepaciente,
+        pp.id_pseudo AS idpaciente,
+        pp.telefone_contato AS telefonepaciente,
+        TO_CHAR(c.data_inicio, 'DD/MM/YYYY') AS dataini,
+        TO_CHAR(c.data_termino, 'DD/MM/YYYY') AS datafim
+      FROM pessoa pp
+      JOIN (SELECT * FROM cuidado 
+            WHERE (data_termino is NULL) or 
+                  (data_termino < NOW())) c
+          ON pp.id_pseudo = c.id_paciente
+      JOIN pessoa pm ON pm.id_pseudo = c.id_medico
+      WHERE pm.nome_civil ILIKE $1
+         OR pm.cpf = $2
+      ORDER BY pp.nome_civil, pm.nome_civil;
     `;
 
     const values = [`%${termo}%`, termo];

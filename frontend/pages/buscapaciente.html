@@ -17,7 +17,7 @@
 
 <div class="container">
   <div class="card p-4">
-    <h2>Consultar Paciente</h2>
+    <h2>Consultar Pacientes em Tratamento por um Medico</h2>
 
     <form onsubmit="buscarPaciente(event)">
       <label>Buscar por Nome ou CPF</label>
@@ -28,11 +28,12 @@
     <table class="table mt-4">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>CPF</th>
+          <th>Nome Medico</th>
+          <th>Nome Paciente</th>
+          <th>ID Paciente</th>
           <th>Telefone</th>
-          <th>Status</th>
+          <th>Data Inicio</th>
+          <th>Data Fim</th>
         </tr>
       </thead>
       <tbody id="tabelaResultados"></tbody>

@@ -22,7 +22,7 @@ router.get("/pacientes", async (req, res) => {
   }
 
   try {
-    // Consulta 1
+    // TODO: Consulta 1
     const query = `
       
     `;
