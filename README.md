@@ -24,11 +24,9 @@ O foco do trabalho é mostrar como o banco de dados projetado pode ser integrado
 
 * **PostgreSQL** — SGBD utilizado para armazenar todas as entidades e consultas do projeto.
 * **Node.js + Express** — API REST responsável por conectar o frontend ao banco, executando transações e queries SQL.
-* **HTML, CSS, JavaScript** — Interface web simples para interação com o sistema.
 * **Fetch API** — Comunicação entre interface e backend.
+* **HTML, CSS, JavaScript** — Interface web simples para interação com o sistema.
 * **Docker** — Contêinerização do ambiente, permitindo subir banco e backend de forma padronizada e reproduzível.
-<!-- * **bcrypt** — Hashing de senhas para a entidade Conta. -->
-<!-- * **Bootstrap 5** — Estilização do frontend com layout responsivo. -->
 
 ---
 
@@ -72,7 +70,7 @@ docker exec -it postgres_container psql -U postgres -d dosecerta < db/consultas.
 
 ## 📄 Work Organization
 
-O projeto é dividido em duas partes principais — **backend** (API em Node.js) e **frontend** (interface web). A seguir está a estrutura completa de diretórios:
+O projeto é dividido em três partes principais — **database (db)** (PostgreSQL), **backend** (API em Node.js) e **frontend** (interface web). A seguir está a estrutura completa de diretórios:
 
 ```
 DoseCerta/
