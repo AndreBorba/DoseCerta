@@ -20,42 +20,37 @@
     <h2>Cadastro de Paciente</h2>
 
     <form onsubmit="cadastrarPaciente(event)">
-      <div class="row">
-        <div class="mt-3">
-          <label>Nome</label>
-          <input class="form-control" name="nome" required>
-        </div>
-
-        <div class="mt-3"">
-          <label>CPF (formato: XXX.XXX.XXX-XX)</label>
-          <input class="form-control" name="cpf" required>
-        </div>
+      <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="jaMedico" onchange="toggleCamposMedico()">
+        <label class="form-check-label" for="jaMedico">Já é médico</label>
       </div>
 
-      <label class="mt-3">Data de Nascimento</label>
-      <input type="date" class="form-control" name="data_nascimento" required>
+      <label>CPF (formato: XXX.XXX.XXX-XX)</label>
+      <input class="form-control mb-3" name="cpf" required onblur="verificaMedico()">
 
-      <label class="mt-3">Gênero</label>
-      <select name="genero" class="form-control">
-        <option value="">-- Selecione --</option>
-        <option value="F">FEMININO</option>
-        <option value="M">MASCULINO</option>
-      </select>
+      <div id="dadosPessoa">
+        <label>Nome</label>
+        <input class="form-control mb-3" name="nome" required>
 
-      <label class="mt-3">Telefone</label>
-      <input name="telefone" class="form-control">
+        <label>Data de Nascimento</label>
+        <input type="date" class="form-control mb-3" name="data_nascimento" required>
 
-      <label class="mt-3">E-mail</label>
-      <input name="email" type="email" class="form-control" required>
+        <label>Gênero</label>
+        <select name="genero" class="form-control mb-3">
+          <option value="">-- Selecione --</option>
+          <option value="F">FEMININO</option>
+          <option value="M">MASCULINO</option>
+        </select>
 
-      <label class="mt-3">Senha</label>
-      <input type="password" name="senha" class="form-control" required>
+        <label>Telefone</label>
+        <input name="telefone" class="form-control mb-3">
 
-      <!-- <label class="mt-3">Status do Paciente</label>
-      <select name="status_paciente" class="form-control">
-        <option value="ATIVO">ATIVO</option>
-        <option value="INATIVO">INATIVO</option>
-      </select> -->
+        <label>E-mail</label>
+        <input name="email" type="email" class="form-control mb-3" required>
+
+        <label>Senha</label>
+        <input type="password" name="senha" class="form-control mb-3" required>
+      </div>
 
       <label class="mt-3">Responsável Legal (CPF do Paciente responsável)</label>
       <input name="responsavel" class="form-control" placeholder="Deixe vazio se não houver">

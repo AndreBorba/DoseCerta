@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
   try {
     await client.query("BEGIN");
 
-    // 1️⃣ Se tiver CPF de responsável, buscar ID correspondente
+    // Se tiver CPF de responsável, buscar ID correspondente
     let idResponsavel = null;
 
     if (responsavel) {
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
       idResponsavel = respResult.rows[0].id_pseudo;
     }
 
-    // 2️⃣ Criar pessoa
+    // Criar pessoa
     const pessoaQuery = `
       INSERT INTO pessoa (cpf, nome_civil, data_nascimento, telefone_contato, genero)
       VALUES ($1, $2, $3, $4, $5)
@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
 
     const idPessoa = pessoaResult.rows[0].id_pseudo;
 
-    // 3️⃣ Criar paciente (agora salvando ID do responsável)
+    // Criar paciente (agora salvando ID do responsável)
     const pacienteQuery = `
       INSERT INTO paciente (id_pseudo, status_paciente, responsavel, historico_familiar)
       VALUES ($1, TRUE, $2, $3)
@@ -69,7 +69,7 @@ router.post("/", async (req, res) => {
       historico_familiar
     ]);
 
-    // 4️⃣ Criar conta
+    // Criar conta
     const contaQuery = `
       INSERT INTO conta (email, senha, id_pessoa)
       VALUES ($1, $2, $3)

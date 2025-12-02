@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
     const query = `
       SELECT 
         pm.nome_civil AS nomemedico,
+        pm.id_pseudo AS idmedico,
         pp.nome_civil AS nomepaciente,
         pp.id_pseudo AS idpaciente,
         TO_CHAR(c.data_inicio, 'DD/MM/YYYY') AS dataini,

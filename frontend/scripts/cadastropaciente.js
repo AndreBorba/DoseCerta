@@ -1,5 +1,36 @@
 const API_BASE = "http://localhost:4000";
 
+// Habilita/desabilita campos de pessoa
+function toggleCamposMedico() {
+  const checked = document.getElementById("jaMedico").checked;
+  document.getElementById("dadosPessoa").style.display = checked ? "none" : "block";
+
+  const inputs = document.querySelectorAll("#dadosPessoa input, #dadosPessoa select");
+  inputs.forEach(input => {
+    input.required = !checked; // se já é médico, não precisa preencher
+  });
+}
+
+// Verifica se CPF já está cadastrado como paciente
+async function verificaMedico() {
+  const cpf = document.querySelector('input[name="cpf"]').value.trim();
+  if (!cpf) return;
+
+  try {
+    const resp = await fetch(`${API_BASE}/buscapessoa?termo=${encodeURIComponent(cpf)}`);
+    const dados = await resp.json();
+
+    // Se retornar medico, marca o checkbox e oculta os campos de pessoa
+    if (dados.some(p => p.eh_medico === "Sim")) {
+      document.getElementById("jaMedico").checked = true;
+      toggleCamposMedico();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Cadastro de paciente
 async function cadastrarPaciente(event) {
   event.preventDefault();
 

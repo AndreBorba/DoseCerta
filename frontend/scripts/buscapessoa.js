@@ -6,14 +6,14 @@ async function buscarPessoa(e) {
   const termo = document.getElementById("termo").value.trim();
   const tabela = document.getElementById("tabelaResultados");
 
-  tabela.innerHTML = "<tr><td colspan='5'>Buscando...</td></tr>";
+  tabela.innerHTML = "<tr><td colspan='4'>Buscando...</td></tr>";
 
   try {
     const resp = await fetch(`${API_BASE}/buscapessoa?termo=${encodeURIComponent(termo)}`);
     const dados = await resp.json();
 
     if (!Array.isArray(dados) || dados.length === 0) {
-      tabela.innerHTML = "<tr><td colspan='5'>Nenhum paciente encontrado</td></tr>";
+      tabela.innerHTML = "<tr><td colspan='4'>Nenhum paciente encontrado</td></tr>";
       return;
     }
 
@@ -32,6 +32,6 @@ async function buscarPessoa(e) {
 
   } catch (error) {
     console.error("Erro ao buscar pessoa:", error);
-    tabela.innerHTML = "<tr><td colspan='5'>Erro ao buscar</td></tr>";
+    tabela.innerHTML = "<tr><td colspan='4'>Erro ao buscar</td></tr>";
   }
 }

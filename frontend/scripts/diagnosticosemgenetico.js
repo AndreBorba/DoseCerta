@@ -26,7 +26,7 @@ async function buscarDiagnosticoSemGenetico(e) {
   const cid = document.getElementById("cid").value;
   const tabela = document.getElementById("tabelaResultados");
 
-  tabela.innerHTML = "<tr><td colspan='3'>Buscando...</td></tr>";
+  tabela.innerHTML = "<tr><td colspan='2'>Buscando...</td></tr>";
 
   try {
     const url = `${API_BASE}/diagnosticosemgenetico/pacientes?cid=${encodeURIComponent(cid)}`;
@@ -34,7 +34,7 @@ async function buscarDiagnosticoSemGenetico(e) {
     const dados = await resp.json();
 
     if (!Array.isArray(dados) || dados.length === 0) {
-      tabela.innerHTML = "<tr><td colspan='3'>Nenhum paciente encontrado</td></tr>";
+      tabela.innerHTML = "<tr><td colspan='2'>Nenhum paciente encontrado</td></tr>";
       return;
     }
 
@@ -49,7 +49,7 @@ async function buscarDiagnosticoSemGenetico(e) {
     });
   } catch (err) {
     console.error("Erro ao buscar pacientes:", err);
-    tabela.innerHTML = "<tr><td colspan='3'>Erro ao buscar</td></tr>";
+    tabela.innerHTML = "<tr><td colspan='2'>Erro ao buscar</td></tr>";
   }
 }
 

@@ -27,9 +27,6 @@ services:
       DB_USER: postgres
       DB_PASS: postgres
       DB_NAME: dosecerta
-    # Removido o volume para não apagar node_modules
-    # volumes:
-    #   - ./backend:/app
 
   frontend:
     build: ./frontend

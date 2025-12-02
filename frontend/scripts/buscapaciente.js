@@ -6,14 +6,14 @@ async function buscarPaciente(e) {
   const termo = document.getElementById("termo").value.trim();
   const tabela = document.getElementById("tabelaResultados");
 
-  tabela.innerHTML = "<tr><td colspan='5'>Buscando...</td></tr>";
+  tabela.innerHTML = "<tr><td colspan='6'>Buscando...</td></tr>";
 
   try {
     const resp = await fetch(`${API_BASE}/buscapaciente?termo=${encodeURIComponent(termo)}`);
     const dados = await resp.json();
 
     if (!Array.isArray(dados) || dados.length === 0) {
-      tabela.innerHTML = "<tr><td colspan='5'>Nenhum paciente encontrado</td></tr>";
+      tabela.innerHTML = "<tr><td colspan='6'>Nenhum paciente encontrado</td></tr>";
       return;
     }
 
@@ -23,6 +23,7 @@ async function buscarPaciente(e) {
       tabela.innerHTML += `
         <tr>
           <td>${p.nomemedico}</td>
+          <td>${p.idmedico}</td>
           <td>${p.nomepaciente}</td>
           <td>${p.idpaciente}</td>
           <td>${p.dataini}</td>
@@ -33,6 +34,6 @@ async function buscarPaciente(e) {
 
   } catch (error) {
     console.error("Erro ao buscar pacientes:", error);
-    tabela.innerHTML = "<tr><td colspan='5'>Erro ao buscar</td></tr>";
+    tabela.innerHTML = "<tr><td colspan='6'>Erro ao buscar</td></tr>";
   }
 }
