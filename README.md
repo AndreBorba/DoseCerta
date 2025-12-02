@@ -38,7 +38,7 @@ O foco do trabalho é mostrar como o banco de dados projetado pode ser integrado
 # Clone o projeto
 git clone https://github.com/AndreBorba/DoseCerta.git
 
-# Entre no diretório do backend
+# Entre no diretório do projeto
 cd DoseCerta
 
 # Build imagens docker
