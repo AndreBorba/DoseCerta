@@ -11,8 +11,6 @@ router.get("/", async (req, res) => {
       SELECT 
         p.id_pseudo AS id,
         p.nome_civil AS nome,
-        p.cpf,
-        p.telefone_contato AS telefone,
         CASE WHEN pa.id_pseudo IS NOT NULL THEN 'Sim' ELSE 'Não' END AS eh_paciente,
         CASE WHEN m.id_pseudo IS NOT NULL THEN 'Sim' ELSE 'Não' END AS eh_medico
       FROM pessoa p

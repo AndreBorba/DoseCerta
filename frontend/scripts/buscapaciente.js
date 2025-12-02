@@ -25,7 +25,6 @@ async function buscarPaciente(e) {
           <td>${p.nomemedico}</td>
           <td>${p.nomepaciente}</td>
           <td>${p.idpaciente}</td>
-          <td>${p.telefonepaciente || "-"}</td>
           <td>${p.dataini}</td>
           <td>${p.datafim}</td>
         </tr>

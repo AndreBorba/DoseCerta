@@ -25,8 +25,7 @@ router.get("/pacientes", async (req, res) => {
     const query = `
       SELECT
           p.nome_civil AS nome,
-          p.telefone_contato AS telefone,
-          d.nome AS diagnostico,
+          d.nome AS diagnostico
       FROM pessoa p
       JOIN paciente pac ON p.id_pseudo = pac.id_pseudo
       JOIN diagnostico diag ON pac.id_pseudo = diag.id_paciente

@@ -24,8 +24,6 @@ async function buscarPessoa(e) {
         <tr>
           <td>${p.id}</td>
           <td>${p.nome}</td>
-          <td>${p.cpf}</td>
-          <td>${p.telefone || "-"}</td>
           <td>${p.eh_paciente}</td>
           <td>${p.eh_medico}</td>
         </tr>

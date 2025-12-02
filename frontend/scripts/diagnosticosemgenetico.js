@@ -43,7 +43,6 @@ async function buscarDiagnosticoSemGenetico(e) {
       tabela.innerHTML += `
         <tr>
           <td>${p.nome}</td>
-          <td>${p.telefone || "-"}</td>
           <td>${p.diagnostico}</td>
         </tr>
       `;

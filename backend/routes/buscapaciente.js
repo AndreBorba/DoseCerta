@@ -16,7 +16,6 @@ router.get("/", async (req, res) => {
         pm.nome_civil AS nomemedico,
         pp.nome_civil AS nomepaciente,
         pp.id_pseudo AS idpaciente,
-        pp.telefone_contato AS telefonepaciente,
         TO_CHAR(c.data_inicio, 'DD/MM/YYYY') AS dataini,
         TO_CHAR(c.data_termino, 'DD/MM/YYYY') AS datafim
       FROM pessoa pp
