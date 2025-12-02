@@ -5,8 +5,7 @@
 -- ========================================================================================
 
 SELECT
-    p.nome_civil,
-    p.telefone_contato,
+    p.id_pseudo,
     d.nome AS nome_doenca,
     diag.data_hora AS data_diagnostico
 FROM
@@ -37,7 +36,7 @@ WHERE
 
 SELECT
     m.nome AS nome_modelo,
-    COUNT(rt.id_diagnostico) AS total_recomendacoes,
+    COUNT(rt.nome_modelo) AS total_recomendacoes,
     SUM(CASE WHEN diag.status = FALSE THEN 1 ELSE 0 END) AS diagnosticos_inativos
 FROM
     modelo m
@@ -76,11 +75,14 @@ JOIN
     identifica i ON eg.nro_protocolo = i.nro_protocolo
 JOIN
     marcador_genetico mg ON i.hgvs = mg.hgvs
-JOIN
-    habitos h ON p.id_pseudo = h.id_paciente
 WHERE
     mg.hgvs = 'NC_000017.11:g.43045802T>G' -- Exemplo de HGVS para variante em BRCA1
-    AND h.habito IN ('Tabagismo', 'Etilismo');
+    AND EXISTS (
+        SELECT 1
+        FROM habitos h
+        WHERE h.id_paciente = p.id_pseudo AND h.habito IN ('Tabagismo', 'Etilismo')
+    );
+
 -- ========================================================================================
 -- CONSULTA 4 (COMPLEXIDADE ALTA): AGRUPAMENTO E DIVERSIFICAÇÃO DE COMANDOS
 -- OBJETIVO: Listar a prevalência de Marcadores Genéticos SOMÁTICOS em Câncer de Pulmão.
