@@ -290,3 +290,21 @@ INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (6, 1003); -- Erica
 INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (7, 1008); -- Laura J45 -> Exame Clinico
 INSERT INTO atrela_se (id_diagnostico, nro_protocolo) VALUES (11, 1011); -- Mariana E11 -> EXame BRCA1
 
+-- Adiciona marcador utilizado na Consulta 3
+INSERT INTO marcador_genetico (hgvs, descricao) VALUES
+('NC_000017.11:g.43045802T>G', 'Variante exemplificativa em BRCA1');
+
+-- Cria exame genético para o paciente 5 (já possui perfil_clinico/peso)
+INSERT INTO exame (nro_protocolo, id_paciente, cnpj_laboratorio, data_hora, tipo) VALUES
+(1012, 5, '00.000.000/0001-01', '2025-05-20 10:00:00', 'GENETICO');
+
+INSERT INTO exame_genetico (nro_protocolo, tipo_amostra, origem_genetica) VALUES
+(1012, 'SANGUINEA', 'GERMINATIVO');
+
+INSERT INTO identifica (nro_protocolo, hgvs) VALUES
+(1012, 'NC_000017.11:g.43045802T>G');
+
+-- Garante que o paciente possui hábito de risco conforme filtro da Consulta 3
+INSERT INTO habitos (id_paciente, habito, data) VALUES
+(5, 'Tabagismo', '2025-05-01');
+
