@@ -76,11 +76,11 @@ JOIN
 JOIN
     marcador_genetico mg ON i.hgvs = mg.hgvs
 WHERE
-    mg.hgvs = 'NC_000017.11:g.43045802T>G' -- Exemplo de HGVS para variante em BRCA1
+    mg.hgvs = 'EGFR L858R' -- Exemplo de HGVS para variante em BRCA1
     AND EXISTS (
         SELECT 1
         FROM habitos h
-        WHERE h.id_paciente = p.id_pseudo AND h.habito IN ('Tabagismo', 'Etilismo')
+        WHERE h.id_paciente = p.id_pseudo AND h.habito IN ('TABAGISMO')
     );
 
 -- ========================================================================================

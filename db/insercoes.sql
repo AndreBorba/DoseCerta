@@ -306,5 +306,5 @@ INSERT INTO identifica (nro_protocolo, hgvs) VALUES
 
 -- Garante que o paciente possui hábito de risco conforme filtro da Consulta 3
 INSERT INTO habitos (id_paciente, habito, data) VALUES
-(5, 'Tabagismo', '2025-05-01');
+(5, 'TABAGISMO', '2025-05-01');
 
